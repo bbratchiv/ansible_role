@@ -7,10 +7,6 @@
     update_cache: true
   notify:
     - Start Nginx
-# name: install epel-release
-# yum: 
-#   name: epel-release
-#   state: latest
 
 - name: copy index file
   template: 
@@ -19,9 +15,3 @@
     owner: root
     group: root
     mode: 0777
-#  - name: Install dumb init
-#      get_url:
-#        dest: /usr/bin/dumb-init
-#        url: https://github.com/Yelp/dumb-init/releases/download/v1.0.2/dumb-init_1.0.2_amd64
-#        mode: 0775
-#        validate_certs: no    
