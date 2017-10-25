@@ -3,7 +3,9 @@
   become: true
 
   vars:
-    USER : admin
+    USERS:
+      - username: admin
+      - username: john
     SWAP_LOCATION: /.SWAP
     SWAP_SIZE: 50
 
