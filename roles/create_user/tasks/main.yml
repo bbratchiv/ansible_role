@@ -1,17 +1,18 @@
 ---
 # tasks file for create_user
-- name: create user "{{ USER }}"    
+- name: create users    
   user:
-    name: "{{ USER }}"
+    name: "{{ item.username }}"
     shell: /bin/bash
     state: present
+  with_items: "{{USERS}}"
     
 - name: upload ssh key                
   authorized_key:
-    user: "{{ USER }}"
+    user: "{{ item.username }}"
     state: present
     manage_dir: yes
-    key: "{{ item }}"
-  with_file:
-    - id_rsa.pub
+    key: "{{ lookup('file', 'files/{{ item.username }}.pub') }}"
+  with_items:
+    - "{{ USERS }}"
  
