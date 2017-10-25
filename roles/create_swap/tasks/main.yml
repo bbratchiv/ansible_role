@@ -1,0 +1,21 @@
+---
+# tasks file for create_swap
+- name: write swap
+  command: "dd if=/dev/zero of={{ SWAP_LOCATION }} bs=1M count={{ SWAP_SIZE }}"
+  register: write_swapfile
+
+- name: changing permissions for swapfile
+  file: path="{{ SWAP_LOCATION }}" mode=600
+
+- name: create swapfile
+  command: "mkswap {{ SWAP_LOCATION  }}"
+  when: write_swapfile.changed
+
+- name: adding swap to fstab
+  lineinfile: 
+    dest: /etc/fstab
+    line: "{{ SWAP_LOCATION }} swap swap defaults 0 0"
+    state: present
+
+- name: enable swap
+  command: "swapon {{SWAP_LOCATION}}"
