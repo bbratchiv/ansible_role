@@ -1,4 +1,4 @@
-Ansible roles for Hello World nginx_app, swap, creating users
+Ansible roles for Hello World nginx site, swap, creating users
 
 Assume that you have vagrant, ansible, virtualbox installed on your system.
 
